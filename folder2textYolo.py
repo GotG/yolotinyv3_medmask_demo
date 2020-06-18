@@ -22,11 +22,11 @@ for pathAndFilename in glob.iglob(os.path.join(dataset_path, "*.jpg")):
 
     if counter <= index_test:
         # counter = 1
-        testfiles.append("data/obj/"+ title + '.jpg')
+        testfiles.append("/content/yolotinyv3_medmask_demo/obj/"+ title + '.jpg')
         counter += 1
     else:
         # file_train.write("data/obj/" + "/" + title + '.jpg' + "\n")
-        trainfiles.append("data/obj/"+ title + '.jpg')
+        trainfiles.append("/content/yolotinyv3_medmask_demo/obj/"+ title + '.jpg')
         # counter = counter + 1
 
 with open('train.txt', mode='w') as f:
