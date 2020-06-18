@@ -1,5 +1,5 @@
 classes= 3
-train  = data/train.txt
-valid  = data/test.txt
-names = data/obj.names
+train  = /content/yolotinyv3_medmask_demo/train.txt
+valid  = /content/yolotinyv3_medmask_demo/test.txt
+names = /content/yolotinyv3_medmask_demo/obj.names
 backup = backup/
