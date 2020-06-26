@@ -1,4 +1,4 @@
-classes= 3
+classes= 2
 train  = /content/yolotinyv3_medmask_demo/train.txt
 valid  = /content/yolotinyv3_medmask_demo/test.txt
 names = /content/yolotinyv3_medmask_demo/obj.names
