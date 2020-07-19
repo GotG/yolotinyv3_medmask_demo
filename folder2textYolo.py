@@ -1,33 +1,49 @@
 import glob, os
 import argparse
+import random
+from collections import Counter
 parser = argparse.ArgumentParser()
 parser.add_argument('test_pct',help="percentage of images to be used for testing, the rest are used for training",
                     type=int)
+parser.add_argument('yolodataset',help="path to directory with images and yolo annotations",
+                    type=str)
 args = parser.parse_args()
-dataset_path = 'obj'
+#dataset_path = '/home/leeroy/Documents/Datasets/yolotinyv3_medmask_demo/obj'
 
-number_of_images=len([name for name in os.listdir(dataset_path)])/2
 # Percentage of images to be used for the test set
-print('Number of images:',number_of_images)
+
 
 
 counter = 1  
-index_test = round(number_of_images*args.test_pct/100)  
+
 
 testfiles=[]
 trainfiles=[]
-for pathAndFilename in glob.iglob(os.path.join(dataset_path, "*.jpg")):  
-    title, ext = os.path.splitext(os.path.basename(pathAndFilename))
+extensions = []
+images=[]
+#check extension of files in folder:
+for filename in os.scandir(args.yolodataset):
+    title,ext = os.path.splitext(filename.name)
+    if ext != "txt":
+       extensions.append(ext)
+       
+ext_dict=Counter(extensions)
+extension = max(ext_dict,key=ext_dict.get)       
+print("Your image file extension is: " + extension)
 
+for filename in os.listdir(args.yolodataset):  
+    _, ext = os.path.splitext(os.path.basename(filename))
+    if ext == extension:
+       images.append(os.path.join(args.yolodataset,filename))
 
-    if counter <= index_test:
-        # counter = 1
-        testfiles.append("/content/yolotinyv3_medmask_demo/obj/"+ title + '.jpg')
-        counter += 1
-    else:
-        # file_train.write("data/obj/" + "/" + title + '.jpg' + "\n")
-        trainfiles.append("/content/yolotinyv3_medmask_demo/obj/"+ title + '.jpg')
-        # counter = counter + 1
+number_of_images = len(images)
+   
+index_test = round(number_of_images*args.test_pct/100)
+testfiles = random.sample(images,index_test)
+trainfiles = list(set(images).difference(set(testfiles)))
+
+print('Number of images:',number_of_images)
+
 
 with open('train.txt', mode='w') as f:
     for item in trainfiles:
