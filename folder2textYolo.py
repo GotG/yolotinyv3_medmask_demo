@@ -24,7 +24,7 @@ images=[]
 #check extension of files in folder:
 for filename in os.scandir(args.yolodataset):
     title,ext = os.path.splitext(filename.name)
-    if ext != "txt":
+    if ext != ".txt":
        extensions.append(ext)
        
 ext_dict=Counter(extensions)
