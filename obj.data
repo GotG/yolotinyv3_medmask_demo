@@ -1,5 +1,5 @@
 classes= 2
 train  = /content/yolotinyv3_medmask_demo/train.txt
-valid  = /content/yolotinyv3_medmask_demo/test.txt
+valid  = /content/yolotinyv3_medmask_demo/valid.txt
 names = /content/yolotinyv3_medmask_demo/obj.names
 backup = backup/
